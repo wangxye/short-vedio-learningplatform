@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>习题 </title>
+
+    <link rel="stylesheet" type="text/css" href="csstable/demo.css">
+    <link rel="stylesheet" type="text/css" href="csstable/style.css" />
+    <link rel="stylesheet" type="text/css" href="csstable/basictable.css" />
+    <script src="jstable/jquery-2.1.1.min.js"></script>
+    <script src="jstable/jquery.basictable.min.js"></script>
+
+
+
+
+</head>
+<body>
+<div class="container">
+    <div id="page">
+        <h2>习题</h2>
+        <p>您可以在下方提交习题答案</p>
+
+
+        <table id="table">
+            <thead>
+            <tr>
+                <th>视频id</th>
+                <th>视频名称</th>
+                <th>习题内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="e:${exercises}">
+                <td th:text="${e.videoId}"></td>
+                <td th:text="${e.videoName}"></td>
+                <td th:text="${e.content}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br><br><br>
+        <div>
+            <form  th:action="@{'/exerciseSuccess?userId='+${userId}}" th:object="${answer}" method="post" >
+                <p>视频号:<input type="text" th:field="*{videoId}" /></p>
+                <p>答案： <textarea th:field="*{content}" /></p>
+                <p><input type="submit" value="提交" /> <input type="reset" value="清空" /></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#table').basictable();
+
+        $('#table-breakpoint').basictable({
+            breakpoint: 768
+        });
+
+        $('#table-swap-axis').basictable({
+            swapAxis: true
+        });
+
+        $('#table-force-off').basictable({
+            forceResponsive: true
+        });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+
+        $('#table-two-axis').basictable();
+
+        $('#table-max-height').basictable({
+            tableWrapper: true
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
+
